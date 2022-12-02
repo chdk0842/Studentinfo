@@ -27,7 +27,7 @@ public class GenerateGradeReport {
 	// 성적 산출 결과의 헤더, 몸통, 푸터를 합쳐준다.
 	public String getReport() {
 		ArrayList<Subject> subjectList = school.getSubjectList(); // 과목리스트 불러오기
-
+  
 		for (Subject subject : subjectList) { // 국어, 수학 총 두 번 실행
 			makeHeader(subject);
 			makeBody(subject);
@@ -77,8 +77,10 @@ public class GenerateGradeReport {
 		// 해당 학생의 필수과목의 과목코드
 		int majorId = student.getMajorSubject().getSubjectId();
 
-		//배열로 만듦.
+		// 배열로 만듦. GradeEvaluation이 인터페이스라서 자동형변환
 		GradeEvaluation[] gradeEvaluations = { new BasicEvaluation(), new MajorEvaluation() };
+		//GradeEvaluation[] gradeEvaluations = new BasicEvaluation()
+		//GradeEvaluation[] gradeEvaluations = new MajorEvaluation()
 
 		for (int i = 0; i < scoreList.size(); i++) { // 두번 돎
 			Score score = scoreList.get(i); // 해당 과목의 점수를 받아온다. 지역변수 / 하나씩 뽑아오기
@@ -87,10 +89,10 @@ public class GenerateGradeReport {
 			if (score.getSubject().getSubjectId() == subjectId) {
 				String grade; // 학점
 
-				//필수과목일 때 학점산출
+				// 필수과목일 때 학점산출
 				if (score.getSubject().getSubjectId() == majorId) {
 					grade = gradeEvaluations[Define.SAB_TYPE].getGrade(score.getPoint());
-					//grade = gradeEvaluations[인덱스 번호 1, 즉 new MajorEvaluation() 실행].getGrade(score.getPoint());
+					// grade = gradeEvaluations[인덱스 번호 1, 즉 new MajorEvaluation() 실행].getGrade(score.getPoint());
 					
 				} else { // 일반과목일 때 학점산출
 					grade = gradeEvaluations[Define.AB_TYPE].getGrade(score.getPoint());

@@ -28,7 +28,8 @@ public class StudentInfoApplication {
 	// 과목을 생성
 	public void createSubject() {
 		korean = new Subject("국어", Define.KOREA);
-		math = new Subject("수학", Define.MATH);
+		math = new Subject("수학", Define.MATH); 
+				
 		//같은 subject타입의 객체가 각각 생성 됨
 
 		goodSchool.addSubject(korean);
@@ -66,6 +67,7 @@ public class StudentInfoApplication {
 		math.register(student4);
 		math.register(student5);
 	
+		
         //학생의 과목별 점수 추가
 		addScoreForStudent(student1, korean, 95);
 		addScoreForStudent(student1, math, 56);
